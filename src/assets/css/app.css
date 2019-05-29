@@ -1,0 +1,25 @@
+.app-container {
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    background-color: #fff;
+}
+
+@media screen and (max-width: 540px) {
+    .app-container {
+        width: 95%;
+    }
+}
+
+
+@media screen and (max-width: 768px) and (min-width: 541px){
+    .app-container {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 960px) {
+    .app-container {
+        width: 85%;
+    }
+}
