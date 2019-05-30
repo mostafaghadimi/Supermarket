@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import './assets/css/normalizer.css'
 import './assets/css/app.css'
 
+import Login from './components/login/login'
+
 export default class App extends Component {
     render() {
         return (
-            <div className="app-container">
-                سلام
-            </div>
+            <Login />
         )
     }
 }
