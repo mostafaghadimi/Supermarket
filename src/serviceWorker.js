@@ -133,3 +133,56 @@ export function unregister() {
     });
   }
 }
+
+const STATIC_CACHE_NAME = 'static-cache-v1'
+
+const FILES_TO_CACHE = [
+  './src/assets/css/addition.css',
+  './src/assets/css/app.css',
+  './src/assets/css/login.css',
+  './src/assets/css/normalizer.css',
+  './src/assets/font/Yekan.eot',
+  './src/assets/font/Yekan.ttf',
+  './src/assets/font/Yekan.eot',
+  './src/assets/font/Yekan.woff',
+  './src/assets/img/addition.jpg',
+  './src/assets/img/login.jpg'  
+]
+
+window.addEventListener('install', (evt) => {
+  console.log('[ServiceWorker] Install');
+  // CODELAB: Precache static resources here.
+  evt.waitUntil(
+    caches.open(STATIC_CACHE_NAME).then((cache) => {
+      console.log('[ServiceWorker] Pre-caching offline page');
+      return cache.addAll(FILES_TO_CACHE);
+    })
+  );  
+  window.skipWaiting();
+});
+
+
+window.addEventListener('activate', (evt) => {
+  console.log('[ServiceWorker] Activate');
+  // CODELAB: Remove previous cached data from disk.
+  evt.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== STATIC_CACHE_NAME) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  window.clients.claim();
+});
+
+window.addEventListener('fetch', (evt) => {
+  console.log('[ServiceWorker] Fetch', evt.request.url);
+  // CODELAB: Add fetch event handler here.
+  if (evt.request.mode !== 'navigate') {
+    // Not a page navigation, bail.
+    return;
+  }
+})
