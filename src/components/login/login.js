@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import './../../assets/css/login.css'
+import { Redirect } from 'react-router-dom'
 
 const pageData = {
     username: "",
@@ -31,23 +32,23 @@ export default class Login extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        let formData = new FormData();
-        formData.append('user_name', pageData.username);
-        formData.append('password', pageData.password);
         fetch('http://localhost:8000/user/login/username/', {
             method: 'POST',
-            body: formData,
+            body: JSON.stringify({
+                user_name: pageData.username,
+                password: pageData.password,
+            }),
             headers: {
+                'Accept': 'application/json',
                 "Content-Type": "application/json; charset=UTF-8"
-            }
+            },
+            credentials: 'same-origin'
         }).then(response => {
             alert(response.statusText);
-            return response.json()
-        }).then(json => {
-            console.log(json);
-            alert(json)
-        })
-
+            if (response.status === 302){
+                window.location.replace("../supermarket/add")
+            }
+        }).catch(console.log)
     }
 
     handlePasswordChange = (e) => {
