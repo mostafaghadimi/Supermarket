@@ -6,6 +6,7 @@ import './assets/css/app.css'
 
 import Login from './components/login/login'
 import Addition from './components/supermarket/add/add-supermarket'
+import Registration from './components/registration/registration'
 
 export default class App extends Component {
     render() {
@@ -14,6 +15,7 @@ export default class App extends Component {
                 <Switch>
                     <Route exact path='/supermarket/add' component={Addition} />
                     <Route exact path='/' component={Login} />
+                    <Route exact path='/user/registration' component={Registration} />
                 </Switch>
             </BrowserRouter>
         )
