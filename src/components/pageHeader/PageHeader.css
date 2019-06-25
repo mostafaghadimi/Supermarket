@@ -1,0 +1,30 @@
+
+.pageHeader {
+    direction: ltr;
+    margin: 0;;
+    background-color: HoneyDew;
+    max-height: 100px;
+}
+
+.pageLogo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 40px;
+    max-height: 100px;
+}
+
+.pageHeaderOption li {
+    display: inline;
+    font-size: 1.2em;
+    padding: 10px;
+    background-color: gainsboro;
+    line-height: 50px;
+}
+
+.pageHeaderOption {
+    box-sizing: border-box;
+    /*width: fit-content;*/
+    margin: 0;
+    overflow: hidden;
+    background-color: darkslategray;
+}

@@ -5,12 +5,11 @@ import '../../../assets/css/addition.css'
 
 const pageData = {
     name: "",
-    address: "",
-    phone: "",
-    owner: "",
+    amount: "",
+    price: "",
 };
 
-export default class Addition extends Component {
+export default class ProductAddition extends Component {
     render() {
         return (
             <div className="addition-container">
@@ -19,23 +18,20 @@ export default class Addition extends Component {
                 </div>
                 <div className="addition-info">
                     <div className="addition-input">
-                        <input type="text" placeholder="نام فروشگاه" onChange={this.handleNameChange}/>
+                        <input type="text" placeholder="نام محصول" onChange={this.handleNameChange}/>
                     </div>
                     <div className="addition-input">
-                        <input type="text" placeholder="آدرس فروشگاه" onChange={this.handleAddressChange}/>
+                        <input type="text" placeholder="قیمت محصول" onChange={this.handlePriceChange}/>
                     </div>
                     <div className="addition-input">
-                        <input type="tel" placeholder="شماره تماس فروشگاه" onChange={this.handlePhoneChange}/>
-                    </div>
-                    <div className="addition-input">
-                        <input type="tel" placeholder="نام صاحب فروشگاه" onChange={this.handleOwnerChange}/>
+                        <input type="tel" placeholder="تعداد محصول" onChange={this.handleAmountChange}/>
                     </div>
                     <div className="addition-input">
                         <input type="file" />
                     </div>
                 </div>
                 <div className="addition-button-container">
-                    <button className="addition-button" onClick={this.onSubmitClicked}>ثبت فروشگاه</button>
+                    <button className="addition-button" onClick={this.onSubmitClicked}>ثبت محصول</button>
                 </div>
             </div>
         )
@@ -43,13 +39,12 @@ export default class Addition extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/market/full_add/', {
+        fetch('http://localhost:8000/market/product_add/', {
             method: 'POST',
             body: JSON.stringify({
                 name: pageData.name,
-                address: pageData.address,
-                phone_number: pageData.phone,
-                owner: pageData.owner,
+                amount: pageData.amount,
+                price: pageData.price,
             }),
             headers: {
                 'Accept': 'application/json',
@@ -69,13 +64,10 @@ export default class Addition extends Component {
         pageData.name = e.target.value;
     };
 
-    handleAddressChange = (e) => {
-        pageData.address = e.target.value;
+    handlePriceChange = (e) => {
+        pageData.price = e.target.value;
     };
-    handlePhoneChange = (e) => {
-        pageData.phone = e.target.value;
-    };
-    handleOwnerChange = (e) => {
-        pageData.owner = e.target.value;
+    handleAmountChange = (e) => {
+        pageData.amount = e.target.value;
     };
 }
