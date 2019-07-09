@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Input, Menu } from 'semantic-ui-react'
+import { Button, Input, Menu, Modal, Icon } from 'semantic-ui-react'
 
+import '../../assets/css/navigation.css'
 export default class MenuExampleSizeSmall extends Component {
   state = { activeItem: 'home' }
 
@@ -10,7 +11,7 @@ export default class MenuExampleSizeSmall extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu size='small'>
+      <Menu size='small' className="navigation">
         <Menu.Item name='خانه' active={activeItem === 'home'} onClick={this.handleItemClick} />
         <Menu.Item
           name='لیست فروشگاه‌ها'
@@ -20,11 +21,55 @@ export default class MenuExampleSizeSmall extends Component {
 
         <Menu.Menu position='left'>
           <Menu.Item>
-            <Button color="green">ثبت نام</Button>
+            <Modal trigger={<Button color="green">ثبت‌‌نام</Button>} className="modal">
+                <Modal.Header className="modal-header">ثبت‌نام</Modal.Header>
+                <Modal.Content>
+                <Modal.Description>
+                    <Input iconPosition='right' placeholder='نام کاربری'>
+                        <Icon name='user' />
+                        <input />
+                    </Input>
+                    <br/>
+                    <br/>
+                    <Input iconPosition='right' placeholder='رمز عبور' type="password">
+                        <Icon name='key' />
+                        <input />
+                    </Input>
+                    <br/>
+                    <br/>
+                    <Button color="green">
+                        ثبت‌نام
+                    </Button>
+                </Modal.Description>
+                </Modal.Content>
+            </Modal>
           </Menu.Item>
+
           <Menu.Item>
-            <Button primary>ورود</Button>
+            <Modal trigger={<Button color="primary">ورود</Button>}>
+                <Modal.Header className='modal-header'>ورود</Modal.Header>
+                <Modal.Content>
+                <Modal.Description>
+                    <Input iconPosition='right' placeholder='نام کاربری'>
+                        <Icon name='user' />
+                        <input />
+                    </Input>
+                    <br/>
+                    <br/>
+                    <Input iconPosition='right' placeholder='رمز عبور'>
+                        <Icon name='key' />
+                        <input />
+                    </Input>
+                    <br/>
+                    <br/>
+                    <Button color="primary">
+                        ورود
+                    </Button>
+                </Modal.Description>
+                </Modal.Content>
+            </Modal>
           </Menu.Item>
+          
         </Menu.Menu>
         <Menu.Item>
           <Input icon='search' placeholder='جست‌و‌جو'/>
