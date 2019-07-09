@@ -28,6 +28,12 @@ input {
     border-radius: 10px;
     border: 0.5px solid #000000;
     padding: 10px;
+    direction: rtl !important;
+}
+
+input,
+button {
+    font-family: 'Yekan' !important;
 }
 
 @font-face {
@@ -40,5 +46,5 @@ input {
 
 body {
     direction: rtl;
-    background-color: #cccccc;
+    background-color: #ffffff;
 }
