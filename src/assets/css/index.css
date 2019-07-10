@@ -1,0 +1,42 @@
+.index {
+    width: 100%;
+}
+
+.index-container{
+    display: grid;
+    padding: 0 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+.index-image {
+    width: 100%;
+}
+
+.index-image > img {
+    max-width: 100%;
+}
+
+.index-item {
+    background-color: #ececec;
+    border-radius: 5px;
+}
+
+.index-title {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 5px;
+}
+
+.index-rating {
+    direction: ltr;
+}
+
+.index-address {
+    padding: 5px;
+}
+
+.index-icon {
+    display: inline-block;
+    margin-left: 5px;
+}

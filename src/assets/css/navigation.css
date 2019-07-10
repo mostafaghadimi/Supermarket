@@ -7,6 +7,20 @@
     text-align: right !important;
 }
 
-.modal input {
+.modal input,
+.navigation input {
     text-align: right !important;
+}
+
+.remember {
+    display: flex;
+}
+
+.remember > input,
+.remember > span {
+    display: inline-block;
+}
+
+.remember > span {
+    margin-right: 5px;
 }
