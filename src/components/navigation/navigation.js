@@ -131,7 +131,7 @@ class IndexItem extends Component {
             <div className="index-title">
               <div>
                 <span className="index-icon">
-                  <Icon name="shopping basket"/>
+                  <Icon name="shopping basket" color="blue"/>
                 </span>
                 فروشگاه سعید
               </div>
@@ -141,7 +141,7 @@ class IndexItem extends Component {
             </div>
             <div className="index-address">
               <span className="index-icon">
-                <Icon name="map marker alternate"/>
+                <Icon name="map marker alternate" color="red"/>
               </span>
                 خ پیروزی، خ پرستار، پارک پرستار
             </div>

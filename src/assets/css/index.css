@@ -15,11 +15,15 @@
 
 .index-image > img {
     max-width: 100%;
+    border-radius: 5px 5px 0 0;
 }
 
 .index-item {
-    background-color: #ececec;
+    background-color: #f5f5f5;
     border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.15);
 }
 
 .index-title {
