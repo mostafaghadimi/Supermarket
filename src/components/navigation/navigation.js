@@ -4,7 +4,7 @@ import {Grid, Card, Image, Rating} from 'semantic-ui-react'
 
 import '../../assets/css/navigation.css'
 import '../../assets/css/index.css'
-export default class MenuExampleSizeSmall extends Component {
+export default class Navigation extends Component {
   state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -100,17 +100,17 @@ export default class MenuExampleSizeSmall extends Component {
 }
 
 
-
 // export default class Index extends Component {
 class Index extends Component {
   render() {
     return (
       <div className="index">
         <div className="index-container">
-          <IndexItem/>
-          <IndexItem/>
-          <IndexItem/>
-          <IndexItem/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
         </div>
 
       </div>
@@ -125,7 +125,7 @@ class IndexItem extends Component {
     return (
       <div className="index-item">
             <div className="index-image">
-              <img src={require('../../assets/img/ok.jpg')}/>
+              <img src={this.props.image}/>
             </div>
 
             <div className="index-title">
@@ -133,17 +133,18 @@ class IndexItem extends Component {
                 <span className="index-icon">
                   <Icon name="shopping basket" color="blue"/>
                 </span>
-                فروشگاه سعید
+                {this.props.title}
               </div>
               <div className="index-rating">
-                <Rating defaultRating={4} maxRating={5} disabled />
+                <Rating defaultRating={this.props.rating} maxRating={5} disabled />
               </div>
             </div>
+  
             <div className="index-address">
               <span className="index-icon">
                 <Icon name="map marker alternate" color="red"/>
               </span>
-                خ پیروزی، خ پرستار، پارک پرستار
+                {this.props.address}
             </div>
 
           </div>
