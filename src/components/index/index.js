@@ -26,9 +26,11 @@ export default class Index extends Component {
     render() {
       return (
         <div className="index-item">
-          <div className="index-image">
-            <img src={this.props.image}/>
-          </div>
+          <Link to={this.props.link}>
+            <div className="index-image">
+                <img src={this.props.image}/>
+            </div>
+          </Link>
   
           <div className="index-title">
             <div>
