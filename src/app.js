@@ -5,26 +5,27 @@ import './assets/css/normalizer.css'
 import './assets/css/app.css'
 
 import Navigation from './components/navigation/navigation'
-// import Login from './components/login/login'
-// import Addition from './components/supermarket/add/add-supermarket'
-// import Registration from './components/registration/registration'
-// import MarketList from "./components/supermarket/list/MarketList";
-// import PageHeader from "./components/pageHeader/PageHeader";
-// import ProductAddition from "./components/supermarket/add_product/add-product";
-// import ProductList from "./components/supermarket/list/ProductList";
-// import RoleAddition from "./components/supermarket/add_role/add-role";
-// import RoleList from "./components/supermarket/list/RoleList";
-
+import Index from './components/index/index'
+import Shop from './components/shop/shop'
 export default class App extends Component {
 
     render() {
         return (
             <BrowserRouter>
-                <Navigation/>
                 <Switch>
-                    {/* <Route exact path='/supermarket/add' component={Addition} />
-                    <Route exact path='/supermarket/list' component={MarketList} />
-                     */}
+                     <Route exact path='/' render={() => (
+                         <div>
+                            <Navigation/>
+                            <Index/>
+                         </div>
+                     )} />
+                     <Route exact path='/shop' render={() => (
+                         <div>
+                            <Navigation/>
+                            <Shop/>
+                         </div>
+                     )}/>
+                
                 </Switch>
             </BrowserRouter>
         )
