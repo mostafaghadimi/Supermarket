@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
 import {Rating, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 import '../../assets/css/index.css'
 
@@ -9,11 +9,12 @@ export default class Index extends Component {
       return (
         <div className="index">
           <div className="index-container">
-            <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
-            <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
-            <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
-            <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
-            <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4}/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+            
           </div>
   
         </div>
@@ -34,7 +35,9 @@ export default class Index extends Component {
               <span className="index-icon">
                 <Icon name="shopping basket" color="blue"/>
               </span>
-              {this.props.title}
+              <Link to={this.props.link}>
+                {this.props.title}
+              </Link>
             </div>
             <div className="index-rating">
               <Rating defaultRating={this.props.rating} maxRating={5} disabled />
