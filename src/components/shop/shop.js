@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Icon} from 'semantic-ui-react'
 
+import Comments from '../comment/comment'
+import AddComment from '../comment/addcomment'
 import '../../assets/css/shopinfo.css'
 
 export default class ShopPage extends Component {
@@ -28,6 +30,10 @@ export default class ShopPage extends Component {
             <ShopProduct image={require('../../assets/img/taj.jpg')}  title="شوینده‌ی لباس تاژ" price="20 هزار تومان"/>
             <ShopProduct image={require('../../assets/img/taj.jpg')}  title="شوینده‌ی لباس تاژ" price="20 هزار تومان"/>
             <ShopProduct image={require('../../assets/img/taj.jpg')}  title="شوینده‌ی لباس تاژ" price="20 هزار تومان"/>
+          </div>
+          <div>
+            <Comments author="مصطفی قدیمی"  date="1 روز پیش" text="خیلی سوپری خوبیه."/>
+            <AddComment/>
           </div>
         </div>
       )
