@@ -8,7 +8,6 @@ import Navigation from './components/navigation/navigation'
 import Index from './components/index/index'
 import Shop from './components/shop/shop'
 export default class App extends Component {
-
     render() {
         return (
             <BrowserRouter>

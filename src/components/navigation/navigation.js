@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input, Menu, Modal, Icon, Radio } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 import '../../assets/css/navigation.css'
 
@@ -14,12 +15,16 @@ export default class Navigation extends Component {
     return (
       <div>
         <Menu size='small' className="navigation">
-          <Menu.Item name='خانه' active={activeItem === 'home'} onClick={this.handleItemClick} />
-          <Menu.Item
-            name='لیست فروشگاه‌ها'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
+          <Link to='/'>
+            <Menu.Item name='خانه' active={activeItem === 'home'} onClick={this.handleItemClick} />
+          </Link>
+          <Link to='/shops'>
+            <Menu.Item
+              name='لیست فروشگاه‌ها'
+              active={activeItem === 'messages'}
+              onClick={this.handleItemClick}
+            />
+          </Link>
 
           <Menu.Menu position='left'>
             <Menu.Item>
