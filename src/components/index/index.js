@@ -1,27 +1,45 @@
 import React, { Component } from 'react'
-import {Rating, Icon} from 'semantic-ui-react'
+import {Rating, Icon, Card} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import '../../assets/css/index.css'
 
 export default class Index extends Component {
+    state = {
+        markets: [],
+    };
+
+    componentDidMount() {
+        fetch('http://127.0.0.1:8000/market/list')
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({markets: data});
+                console.log(this.state.markets)
+            })
+            .catch(console.log);
+    }
+
     render() {
       return (
         <div className="index">
           <div className="index-container">
-          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-          <IndexItem title="فروشگاه سعید" address="تهران، خ پیروزی، خ پرستار، پارک پرستار" image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-            
+              <React.Fragment>
+                  {
+                      this.state.markets.map(market => {
+                          const {name, address, phone_number, owner} = market;
+                          return (
+                              <IndexItem title={name} address={address} image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
+                          );
+                      })
+                  }
+              </React.Fragment>
           </div>
   
         </div>
       )
     }
   }
-  
+
   class IndexItem extends Component {
     render() {
       return (
