@@ -7,6 +7,7 @@ import './assets/css/app.css'
 import Navigation from './components/navigation/navigation'
 import Index from './components/index/index'
 import Shop from './components/shop/shop'
+import ShopSubmit from './components/shop/shop-submit'
 export default class App extends Component {
     render() {
         return (
@@ -22,6 +23,12 @@ export default class App extends Component {
                          <div>
                             <Navigation/>
                             <Shop/>
+                         </div>
+                     )} />
+                     <Route exact path='/shop-submit' render={() => (
+                         <div>
+                             <Navigation/>
+                             <ShopSubmit/>
                          </div>
                      )}/>
                 

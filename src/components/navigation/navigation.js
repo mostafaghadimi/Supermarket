@@ -18,9 +18,9 @@ export default class Navigation extends Component {
           <Link to='/'>
             <Menu.Item name='خانه' active={activeItem === 'home'} onClick={this.handleItemClick} />
           </Link>
-          <Link to='/shops'>
+          <Link to='/shop-submit'>
             <Menu.Item
-              name='لیست فروشگاه‌ها'
+              name='ثبت فروشگاه'
               active={activeItem === 'messages'}
               onClick={this.handleItemClick}
             />

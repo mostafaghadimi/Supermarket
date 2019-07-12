@@ -1,0 +1,12 @@
+.shop-submit {
+    margin: 20px;
+}
+
+.shop-submit * {
+    font-family: 'Yekan';
+
+}
+
+.shop-submit input {
+    text-align: right !important;
+}
