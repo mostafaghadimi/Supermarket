@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Rating, Icon, Card} from 'semantic-ui-react'
+import {Rating, Icon} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import '../../assets/css/index.css'

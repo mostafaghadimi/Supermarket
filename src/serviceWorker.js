@@ -21,7 +21,9 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  // TODO: correct this condition
+  // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
@@ -137,16 +139,17 @@ export function unregister() {
 const STATIC_CACHE_NAME = 'static-cache-v1'
 
 const FILES_TO_CACHE = [
-  './src/assets/css/addition.css',
   './src/assets/css/app.css',
-  './src/assets/css/login.css',
+  './src/assets/css/comment.css',
+  './src/assets/css/index.css',
+  './src/assets/css/navigation.css',
   './src/assets/css/normalizer.css',
+  './src/assets/css/shop-submit.css',
+  './src/assets/css/shopinfo.css',
   './src/assets/font/Yekan.eot',
   './src/assets/font/Yekan.ttf',
   './src/assets/font/Yekan.eot',
   './src/assets/font/Yekan.woff',
-  './src/assets/img/addition.jpg',
-  './src/assets/img/login.jpg'  
 ]
 
 window.addEventListener('install', (evt) => {

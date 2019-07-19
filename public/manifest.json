@@ -6,7 +6,8 @@
   "lang": "fa-IR",
   "background_color": "#2196f3",
   "display": "standalone",
-  "Scope": "/",
+  "dir": "rtl",
+  "Scope": ".",
   "start_url": "/",
   "icons": [
     {
