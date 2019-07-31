@@ -21,14 +21,14 @@ export default class cart extends Component {
                     <Table.Row>
                         <Table.Cell>مایع لباس‌شویی سافتلن</Table.Cell>
                         <Table.Cell>1</Table.Cell>                        
-                        <Table.Cell>24000</Table.Cell>                        
-                        <Table.Cell>24000</Table.Cell>                        
+                        <Table.Cell>24.000</Table.Cell>                        
+                        <Table.Cell>24.000</Table.Cell>                        
                     </Table.Row>
                     <Table.Row>
                         <Table.Cell>مایع لباس‌شویی تاژ</Table.Cell>
                         <Table.Cell>2</Table.Cell>                        
-                        <Table.Cell>24000</Table.Cell>
-                        <Table.Cell>48000</Table.Cell>
+                        <Table.Cell>24.000</Table.Cell>
+                        <Table.Cell>48.000</Table.Cell>
                     </Table.Row>
                     </Table.Body>
                 </Table>
@@ -43,9 +43,40 @@ export default class cart extends Component {
                     </Menu.Item>
                 </Menu>
 
-                <Button color='orange'>
-                    پرداخت
-                </Button>
+                <Menu>
+                    <Menu.Item>
+                        <span>
+                            جمع مبالغ:
+                        </span>
+                        <span>
+                            72.000
+                        </span>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <span>
+                            تخفیف:
+                        </span>
+                        <span>
+                            10.000
+                        </span>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <span>
+                            قابل پرداخت:
+                        </span>
+                        <span>
+                            62.000
+                        </span>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button color='orange'>
+                            پرداخت
+                        </Button>
+                        
+                    </Menu.Item>
+                </Menu>
+
+                
             </div>
         )
     }
