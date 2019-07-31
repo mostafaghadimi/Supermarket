@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, Input, Menu, Modal, Icon, Radio} from 'semantic-ui-react'
+import {Button, Input, Menu, Modal, Icon, Label, Radio} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 import '../../assets/css/navigation.css'
@@ -99,6 +99,13 @@ export default class Navigation extends Component {
                         </Menu.Item>
 
                     </Menu.Menu>
+                    <Menu.Item>
+                        <Link to="/cart">
+                            <Label as="a">
+                                <Icon name="shopping bag" /> 22
+                            </Label>
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item>
                         <Input icon='search' placeholder='جست‌و‌جو'/>
                     </Menu.Item>
