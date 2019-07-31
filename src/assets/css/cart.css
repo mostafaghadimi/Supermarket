@@ -1,0 +1,17 @@
+.cart {
+    padding: 10px;
+}
+
+.cart tr {
+    text-align: start;
+}
+
+.offcode {
+    direction: rtl;
+    text-align: start;
+}
+
+.cart button{
+    display: block !important;
+    margin: auto !important;
+}

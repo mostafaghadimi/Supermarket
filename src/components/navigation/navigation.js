@@ -102,7 +102,7 @@ export default class Navigation extends Component {
                     <Menu.Item>
                         <Link to="/cart">
                             <Label as="a">
-                                <Icon name="shopping bag" /> 22
+                                <Icon name="shopping bag" /> سبد خرید 
                             </Label>
                         </Link>
                     </Menu.Item>

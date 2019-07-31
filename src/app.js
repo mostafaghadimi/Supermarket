@@ -8,6 +8,8 @@ import Navigation from './components/navigation/navigation'
 import Index from './components/index/index'
 import Shop from './components/shop/shop'
 import ShopSubmit from './components/shop/shop-submit'
+import Cart from './components/cart/cart'
+
 export default class App extends Component {
     render() {
         return (
@@ -31,6 +33,13 @@ export default class App extends Component {
                              <ShopSubmit/>
                          </div>
                      )}/>
+
+                     <Route exact path="/cart" render={() => (
+                         <div>
+                            <Navigation/>
+                            <Cart/>
+                         </div>
+                     )} />
                 
                 </Switch>
             </BrowserRouter>
