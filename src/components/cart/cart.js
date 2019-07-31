@@ -3,7 +3,7 @@ import { Icon, Button, Menu, Table, Input } from 'semantic-ui-react'
 
 import '../../assets/css/cart.css'
 
-export default class cart extends Component {
+export default class Cart extends Component {
     render() {
         return (
             <div className="cart">

@@ -9,6 +9,7 @@ import Index from './components/index/index'
 import Shop from './components/shop/shop'
 import ShopSubmit from './components/shop/shop-submit'
 import Cart from './components/cart/cart'
+import AppInstall from './components/app/install'
 
 export default class App extends Component {
     render() {
@@ -40,6 +41,14 @@ export default class App extends Component {
                             <Cart/>
                          </div>
                      )} />
+
+                     <Route exact path="/app" render={() => (
+                         <div>
+                             <Navigation/>
+                             <AppInstall/>
+                         </div>
+
+                     )}/>
                 
                 </Switch>
             </BrowserRouter>
