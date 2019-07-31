@@ -6,7 +6,7 @@ import '../../assets/css/app-install.css'
 
 export default class Install extends Component {
 
-    componentDidUpdate() {
+    componentDidMount() {
         let deferredPrompt;   
         var banner = document.querySelector('#banner');
     

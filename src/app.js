@@ -44,7 +44,7 @@ export default class App extends Component {
                          </div>
                      )} />
 
-                     <Route exact path="/app" render={() => (
+                     <Route exact path="/download" render={() => (
                          <div>
                              <Navigation/>
                              <AppInstall/>

@@ -101,7 +101,7 @@ export default class Navigation extends Component {
 
                     </Menu.Menu>
                     <Menu.Item>
-                        <Link to="/cart">
+                        <Link to="/download">
                             <Label as="a">
                                 <Icon name="shopping bag" /> سبد خرید 
                             </Label>
