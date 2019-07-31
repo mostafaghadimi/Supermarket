@@ -7,10 +7,11 @@ import {
     mainDiv
 } from "../assets/material";
 import AppBar from 'material-ui/AppBar';
+import {login, register} from "../server/server_utils";
 
 class HomePage extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loading: false,
             sign_in: false,
@@ -18,14 +19,62 @@ class HomePage extends Component {
             left_drawer: false,
             snack_state: false,
             snack_text: "",
+            username: "",
+            password: "",
         };
+    }
+
+    onChange(event) {
+        const state = this.state;
+        state[event.target.name] = event.target.value;
+        this.setState(state);
+    }
+
+    register_success(response){
+        console.log(response);
+        if (response.status === 201){
+            this.setState({
+                snack_state: true,
+                snack_text: "Sign Up Successfully",
+            });
+        }
+        else {
+            this.setState({
+                snack_state: true,
+                snack_text: "Duplicate Username",
+            });
+        }
+    }
+
+    register_fail(error){
+        console.log(error)
+    }
+
+    login_success(response){
+        console.log(response);
+        if (response.status === 201){
+            this.setState({
+                snack_state: true,
+                snack_text: "Sign Up Successfully",
+            });
+        }
+        else {
+            this.setState({
+                snack_state: true,
+                snack_text: "Duplicate Username",
+            });
+        }
+    }
+
+    login_fail(error){
+        console.log(error)
     }
 
     render() {
         return (
             <div style={Object.assign({}, mainDiv)}>
                 <AppBar
-                    title='SuperMarker'
+                    title='SuperMarket'
                     onLeftIconButtonClick={() => {
                         this.setState({
                             left_drawer: true,
@@ -65,11 +114,7 @@ class HomePage extends Component {
                                 label="Sign In"
                                 primary={true}
                                 onClick={() => {
-                                    // parseSignIn(
-                                    //     this.state,
-                                    //     this.signInSuccess,
-                                    //     this.props.addSnackText,
-                                    //     this.props.setLoading)
+                                    login(this.state, this.login_success, this.login_fail)
                                 }}
                             />
                         </div>
@@ -86,7 +131,7 @@ class HomePage extends Component {
                         name="username"
                         hintText="Username"
                         floatingLabelText="Username"
-                        onChange={this.onChange}
+                        onChange={(event) => {this.onChange(event)}}
                         type="text"
                         // value={this.state.username}
                     />
@@ -94,7 +139,7 @@ class HomePage extends Component {
                         name="password"
                         hintText="Password"
                         floatingLabelText="Password"
-                        onChange={this.onChange}
+                        onChange={(event) => {this.onChange(event)}}
                         type="password"
                         // value={this.state.password}
                     />
@@ -118,6 +163,7 @@ class HomePage extends Component {
                                 label="Sign Up"
                                 primary={true}
                                 onClick={() => {
+                                    register(this.state, this.register_success, this.register_fail)
                                 }}
                             />
                         </div>
@@ -134,25 +180,25 @@ class HomePage extends Component {
                         name="username"
                         hintText="Username"
                         floatingLabelText="Username"
-                        onChange={this.onChange}
+                        onChange={(event) => {this.onChange(event)}}
                         type="text"
-                        // value={this.state.username}
+                        value={this.state.username}
                     />
                     <TextField
                         name="email"
                         hintText="Email"
                         floatingLabelText="Email"
-                        onChange={this.onChange}
+                        onChange={(event) => {this.onChange(event)}}
                         type="email"
-                        // value={this.state.email}
+                        value={this.state.email}
                     />
                     <TextField
                         name="password"
                         hintText="Password"
                         floatingLabelText="Password"
-                        onChange={this.onChange}
+                        onChange={(event) => {this.onChange(event)}}
                         type="password"
-                        // value={this.state.password}
+                        value={this.state.password}
                     />
                 </Dialog>
                 <Drawer
