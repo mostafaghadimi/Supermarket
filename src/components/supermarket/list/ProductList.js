@@ -14,7 +14,7 @@ export default class ProductList extends Component {
     };
 
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/market/product_list')
+        fetch('http://192.168.1.10:8000/market/product_list')
             .then(res => res.json())
             .then((data) => {
                 this.setState({markets: data});

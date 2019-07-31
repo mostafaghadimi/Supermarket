@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 
 import '../../assets/css/shop-submit.css'
+import Constant from "../../Constant";
 
 const pageData = {
     name: "",
@@ -17,14 +18,14 @@ export default class ShopSubmit extends Component {
             <div className="shop-submit"> 
                 <Form>
                     <Form.Group widths='equal'>
-                    <Form.Input fluid label='نام فروشگاه' placeholder='نام فروشگاه' />
-                    <Form.Input fluid label='شماره تماس' placeholder='شماره تماس' />
-                    <Form.Input fluid label='آدرس' placeholder='آدرس' />
+                    <Form.Input fluid label='نام فروشگاه' placeholder='نام فروشگاه' onChange={this.handleNameChange}/>
+                    <Form.Input fluid label='شماره تماس' placeholder='شماره تماس' onChange={this.handlePhoneChange}/>
+                    <Form.Input fluid label='آدرس' placeholder='آدرس'  onChange={this.handleAddressChange}/>
                     </Form.Group>
                     
                     <Form.TextArea label='توضیحات' placeholder='توضیحات ...'/>
                     <Form.Checkbox label='قوانین مربوط به ثبت فروشگاه را مطالعه کرده‌ام.' />
-                    <Form.Button>ثبت</Form.Button>
+                    <Form.Button onClick={this.onSubmitClicked}>ثبت</Form.Button>
                 </Form>
             </div>
 
@@ -33,13 +34,12 @@ export default class ShopSubmit extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/market/full_add/', {
+        fetch('http://192.168.1.10:8000/market/full_add/', {
             method: 'POST',
             body: JSON.stringify({
                 name: pageData.name,
                 address: pageData.address,
                 phone_number: pageData.phone,
-                owner: pageData.owner,
             }),
             headers: {
                 'Accept': 'application/json',
@@ -64,8 +64,5 @@ export default class ShopSubmit extends Component {
     };
     handlePhoneChange = (e) => {
         pageData.phone = e.target.value;
-    };
-    handleOwnerChange = (e) => {
-        pageData.owner = e.target.value;
     };
 }

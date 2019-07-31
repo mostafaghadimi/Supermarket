@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Button, Input, Menu, Modal, Icon, Label, Radio} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
+
 import '../../assets/css/navigation.css'
 
 const pageData = {
@@ -69,13 +70,13 @@ export default class Navigation extends Component {
                                 <Modal.Header className='modal-header'>ورود</Modal.Header>
                                 <Modal.Content>
                                     <Modal.Description>
-                                        <Input iconPosition='right' placeholder='نام کاربری'>
+                                        <Input iconPosition='right' placeholder='نام کاربری' onChange={this.handleNameChange}>
                                             <Icon name='user'/>
                                             <input/>
                                         </Input>
                                         <br/>
                                         <br/>
-                                        <Input iconPosition='right' placeholder='رمز عبور' type="password">
+                                        <Input iconPosition='right' placeholder='رمز عبور' type="password" onChange={this.handlePasswordChange}>
                                             <Icon name='key'/>
                                             <input/>
                                         </Input>
@@ -128,7 +129,7 @@ export default class Navigation extends Component {
 
     signUp(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/user/signup/', {
+        fetch('http://192.168.1.10:8000/user/signup/', {
             method: 'POST',
             body: JSON.stringify({
                 user_name: pageData.name,
@@ -153,7 +154,7 @@ export default class Navigation extends Component {
 
     login(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/user/login/username/', {
+        fetch('http://192.168.1.10:8000/user/login/username/', {
             method: 'POST',
             body: JSON.stringify({
                 user_name: pageData.name,

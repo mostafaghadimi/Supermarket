@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 import '../../../assets/css/addition.css'
-import {Card, Grid, Item, Segment} from "semantic-ui-react";
+import {Card, Grid, Segment} from "semantic-ui-react";
 
 
 export default class MarketList extends Component {
@@ -14,7 +14,7 @@ export default class MarketList extends Component {
     };
 
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/market/list')
+        fetch('http://192.168.1.10:8000/market/list')
             .then(res => res.json())
             .then((data) => {
                 this.setState({markets: data});
