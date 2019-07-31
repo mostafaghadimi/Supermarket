@@ -10,7 +10,7 @@ export default class Index extends Component {
     };
 
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/market/list')
+        fetch('http://192.168.1.10:8000/market/list')
             .then(res => res.json())
             .then((data) => {
                 this.setState({markets: data});
@@ -23,16 +23,12 @@ export default class Index extends Component {
       return (
         <div className="index">
           <div className="index-container">
-              <React.Fragment>
-                  {
-                      this.state.markets.map(market => {
-                          const {name, address, phone_number, owner} = market;
-                          return (
-                              <IndexItem title={name} address={address} image={require('../../assets/img/ok.jpg')} rating={4} link="/shop"/>
-                          );
-                      })
-                  }
-              </React.Fragment>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
+              <IndexItem title="name" address="address" image={require('../../assets/img/ok.jpg')} rating={3} link="/shop"/>
           </div>
   
         </div>

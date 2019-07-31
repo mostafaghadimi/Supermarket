@@ -14,7 +14,7 @@ export default class RoleList extends Component {
     };
 
     componentDidMount() {
-        fetch('http://127.0.0.1:8000/market/role_list')
+        fetch('http://192.168.1.10:8000/market/role_list')
             .then(res => res.json())
             .then((data) => {
                 this.setState({markets: data});

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 import '../../../assets/css/addition.css'
 
@@ -43,7 +43,7 @@ export default class Addition extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/market/full_add/', {
+        fetch('http://192.168.1.10:8000/market/full_add/', {
             method: 'POST',
             body: JSON.stringify({
                 name: pageData.name,
