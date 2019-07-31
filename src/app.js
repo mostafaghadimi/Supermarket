@@ -11,6 +11,8 @@ import ShopSubmit from './components/shop/shop-submit'
 import Cart from './components/cart/cart'
 import AppInstall from './components/app/install'
 
+import * as serviceWorker from './serviceWorker';
+
 export default class App extends Component {
     render() {
         return (
@@ -55,3 +57,5 @@ export default class App extends Component {
         )
     }
 }
+
+serviceWorker.register()
