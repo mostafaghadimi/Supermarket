@@ -263,6 +263,16 @@ const hasMenu = () => {
                         </Modal.Content>
                     </Modal>
                 </Menu.Item>
+                <Menu.Item>
+                    <Link to="/cart">
+                        <Label as="a">
+                            <Icon name="shopping bag"/> سبد خرید
+                        </Label>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item>
+                    <Input icon='search' placeholder='جست‌و‌جو'/>
+                </Menu.Item>
 
             </Menu.Menu>
         )
