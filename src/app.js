@@ -11,6 +11,8 @@ import ShopSubmit from './components/shop/shop-submit'
 import Cart from './components/cart/cart'
 import AppInstall from './components/app/install'
 
+import * as serviceWorker from './serviceWorker';
+
 export default class App extends Component {
     render() {
         return (
@@ -54,7 +56,7 @@ export default class App extends Component {
                          </div>
                      )} />
 
-                     <Route exact path="/app" render={() => (
+                     <Route exact path="/download" render={() => (
                          <div>
                              <Navigation/>
                              <AppInstall/>
@@ -67,3 +69,5 @@ export default class App extends Component {
         )
     }
 }
+
+serviceWorker.register()
