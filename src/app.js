@@ -20,19 +20,31 @@ export default class App extends Component {
                 <Switch>
                      <Route exact path='/' render={() => (
                          <div>
-                            <Navigation/>
-                            <Index/>
+                            <Navigation isShop={false}/>
+                            <Index isSearch={false}/>
                          </div>
                      )} />
-                     <Route exact path='/shop' render={() => (
+                    <Route exact path='/search/:id' render={() => (
+                        <div>
+                            <Navigation isShop={false}/>
+                            <Index isSearch={true}/>
+                        </div>
+                    )} />
+                    <Route exact path='/search/' render={() => (
+                        <div>
+                            <Navigation isShop={false}/>
+                            <Index isSearch={false}/>
+                        </div>
+                    )} />
+                    <Route exact path='/shop' render={() => (
                          <div>
-                            <Navigation/>
+                            <Navigation isShop={true}/>
                             <Shop/>
                          </div>
                      )} />
                      <Route exact path='/shop-submit' render={() => (
                          <div>
-                             <Navigation/>
+                             <Navigation isShop={false}/>
                              <ShopSubmit/>
                          </div>
                      )}/>

@@ -3,12 +3,14 @@ import { Form } from 'semantic-ui-react'
 
 import '../../assets/css/shop-submit.css'
 import Constant from "../../Constant";
+import Navigation from "../navigation/navigation";
 
 const pageData = {
     name: "",
     address: "",
     phone: "",
     owner: "",
+    desc: "",
 };
 
 
@@ -23,8 +25,8 @@ export default class ShopSubmit extends Component {
                     <Form.Input fluid label='آدرس' placeholder='آدرس'  onChange={this.handleAddressChange}/>
                     </Form.Group>
                     
-                    <Form.TextArea label='توضیحات' placeholder='توضیحات ...'/>
-                    <Form.Checkbox label='قوانین مربوط به ثبت فروشگاه را مطالعه کرده‌ام.' />
+                    <Form.TextArea label='توضیحات' placeholder='توضیحات ...' onChange={this.handleDescChange}/>
+                    <Form.Checkbox label='قوانین مربوط به ثبت فروشگاه را مطالعه کرده‌ام.'/>
                     <Form.Button onClick={this.onSubmitClicked}>ثبت</Form.Button>
                 </Form>
             </div>
@@ -34,12 +36,27 @@ export default class ShopSubmit extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://192.168.1.10:8000/market/full_add/', {
+        console.log(pageData);
+        const item = localStorage.getItem("USER_INFO");
+        let api = "";
+        let owner = "";
+        if (item !== null){
+            let parse = JSON.parse(item);
+            api = parse.api;
+            owner = parse.id;
+        }
+        console.log("api = " + api);
+        console.log("item = " + item);
+        console.log("owner = " + owner);
+        fetch('http://192.168.194.100:8000/market/add/', {
             method: 'POST',
             body: JSON.stringify({
-                name: pageData.name,
+                market_name: pageData.name,
                 address: pageData.address,
                 phone_number: pageData.phone,
+                description: pageData.desc,
+                owner: owner,
+                api: api,
             }),
             headers: {
                 'Accept': 'application/json',
@@ -47,9 +64,9 @@ export default class ShopSubmit extends Component {
             },
             credentials: 'same-origin'
         }).then(response => {
-            alert(response.statusText);
-            if (response.status === 302){
-
+            console.log(response);
+            if (response.status === 201){
+                window.open('/', '_self');
             }
             return response.json()
         }).catch(console.log)
@@ -64,5 +81,9 @@ export default class ShopSubmit extends Component {
     };
     handlePhoneChange = (e) => {
         pageData.phone = e.target.value;
+    };
+
+    handleDescChange = (e) => {
+        pageData.desc = e.target.value;
     };
 }
