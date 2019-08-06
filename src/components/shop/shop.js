@@ -12,15 +12,16 @@ export default class ShopPage extends Component {
         market: {
             comments_count: 3,
             rates_result: 3,
-            comments: []
+            comments: [],
         },
+        models: [],
     };
 
     handleRate = (e, {rating}) => {
         const item = JSON.parse(localStorage.getItem("USER_INFO"));
         const marketId = JSON.parse(localStorage.getItem("market_id"));
 
-        fetch('http://192.168.194.100:8000/market/rate/', {
+        fetch('http://localhost:8000/market/rate/', {
             method: 'POST',
             body: JSON.stringify({
                 id: marketId,
@@ -47,7 +48,8 @@ export default class ShopPage extends Component {
 
     componentDidMount() {
         const marketId = JSON.parse(localStorage.getItem("market_id"));
-        fetch('http://192.168.194.100:8000/market/detail/', {
+
+        fetch('http://localhost:8000/market/detail/', {
             method: 'POST',
             body: JSON.stringify({
                 id: marketId,
@@ -61,10 +63,32 @@ export default class ShopPage extends Component {
             .then(res => res.json())
             .then((data) => {
                 this.setState({market: data});
-                console.log(data);
+                console.log("data = " + data);
+            })
+            .catch(console.log);
+
+        fetch('http://localhost:8000/model/menu/search/', {
+            method: 'POST',
+            body: JSON.stringify({
+                market: marketId,
+                product_name: "",
+            }),
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+            credentials: 'same-origin'
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log("data.models");
+                console.log(data.models);
+                this.setState({models: data.models});
+                console.log(this.state.models)
             })
             .catch(console.log);
     }
+
 
     render() {
         return (
@@ -81,22 +105,18 @@ export default class ShopPage extends Component {
                             <ShopInfo info={this.state.market.comments_count + " نظر"} icon="comment" color="yellow"/>
                         </div>
                         <div className="shop-image">
-                            <img src={"http://192.168.194.100:8000" + this.state.market.image}/>
+                            <img src={"http://localhost:8000" + this.state.market.image}/>
                         </div>
                     </div>
                     <div className="shop-products">
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
-                        <ShopProduct image={require('../../assets/img/taj.jpg')} title="شوینده‌ی لباس تاژ"
-                                     price="20 هزار تومان"/>
+                        {
+                            this.state.models.map(({id, product_name, price, image}) => {
+                                return (
+                                    <ShopProduct image={"http://localhost:8000" + image} title={product_name}
+                                                 price={price}/>
+                                )
+                            })
+                        }
                     </div>
                     <div>
                         <Rating defaultRating={this.state.market.rates_result} maxRating={5} onRate={this.handleRate}/>
@@ -107,7 +127,7 @@ export default class ShopPage extends Component {
                                 )
                             })
                         }
-                        <AddComment/>
+                        <AddComment isShop={true}/>
                     </div>
                 </div>
             </React.Fragment>
