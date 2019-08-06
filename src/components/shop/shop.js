@@ -80,6 +80,12 @@ export default class ShopPage extends Component {
             </span>
               {this.props.price}
           </div>
+          <div className="product-to-cart">
+            <Icon name="add square" color="orange"/>
+              <span className="add-to-cart">
+                 افزودن به سبد خرید
+              </span>
+          </div>
         </div>
       )
     }

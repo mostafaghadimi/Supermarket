@@ -72,12 +72,18 @@
 
 .shop-title {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     padding: 5px;
 }
 
-.product-price {
+.product-price,
+.product-to-cart {
     padding: 5px;
+}
+
+.add-to-cart {
+    display: inline-block;
+    margin-right: 5px;
 }
 
 .shop-icon {
