@@ -153,6 +153,7 @@ class ShopProduct extends Component {
             <span className="shop-icon">
               <Icon name="money bill alternate outline" color="green"/>
             </span>
+<<<<<<< HEAD
               {this.props.price}
           </div>
           <div className="product-to-cart">
@@ -162,6 +163,12 @@ class ShopProduct extends Component {
               </span>
           </div>
         </div>
+      )
+=======
+                    {this.props.price}
+                </div>
+            </div>
         )
+>>>>>>> cd847a0db3c3ebfadde81a2bd7a7582079d1f18f
     }
 }
