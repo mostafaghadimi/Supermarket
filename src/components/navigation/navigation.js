@@ -13,13 +13,21 @@ const pageData = {
     lastName: "",
     phone: "",
     pattern: "",
+    validation: "",
     productName: "",
-    price: "",
+    price: 0,
+    amount: 0,
+    desc: "",
+    location: false,
 };
 const USER_INFO = "USER_INFO";
 const state = {activeItem: 'home'};
 let isShop = false;
 
+
+const toggle = () => {
+    pageData.location = !pageData.location
+};
 
 export default class Navigation extends Component {
 
@@ -41,6 +49,7 @@ export default class Navigation extends Component {
                         <Input icon='search' placeholder='جست‌و‌جو' onKeyDown={handleKeyDown}
                                onChange={handlePatternChange}/>
                     </Menu.Item>
+                    <Radio toggle label='برحسب مکان' onChange={toggle} style={{marginTop: "15px"}}/>
                 </Menu>
             </div>
         )
@@ -69,7 +78,7 @@ const handleEmailChange = (e) => {
 
 const signUp = (event) => {
     event.preventDefault();
-    fetch('http://192.168.194.100:8000/user/signup/username/', {
+    fetch('http://localhost:8000/user/signup/username/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: pageData.name,
@@ -98,7 +107,7 @@ const signUp = (event) => {
 
 const login = (event) => {
     event.preventDefault();
-    fetch('http://192.168.194.100:8000/user/login/username/', {
+    fetch('http://localhost:8000/user/login/username/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: pageData.name,
@@ -129,7 +138,7 @@ const login = (event) => {
 const getNewData = () => {
     const item = JSON.parse(localStorage.getItem(USER_INFO));
 
-    fetch('http://192.168.194.100:8000/user/show/profile/', {
+    fetch('http://localhost:8000/user/show/profile/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: item.user_name,
@@ -150,8 +159,34 @@ const getNewData = () => {
 
 const handleItemClick = (e, {name}) => state.activeItem = name;
 
-const submit = (e) => {
+const submit = (event) => {
+    event.preventDefault();
+    const marketId = JSON.parse(localStorage.getItem("market_id"));
 
+    const item = JSON.parse(localStorage.getItem(USER_INFO));
+    fetch('http://localhost:8000/model/add/', {
+        method: 'POST',
+        body: JSON.stringify({
+            market: marketId,
+            product_name: pageData.productName,
+            count: 45,
+            price: pageData.price,
+            description: pageData.desc,
+            api: item.api,
+            owner: item.id,
+        }),
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json; charset=UTF-8"
+        },
+        credentials: 'same-origin'
+    }).then(response => {
+        if (response.status === 201) {
+            window.open('/shop/', '_self')
+        } else {
+        }
+        return response.json()
+    }).catch(console.log);
 };
 
 const handlePriceChange = (e) => {
@@ -160,6 +195,14 @@ const handlePriceChange = (e) => {
 
 const handleProductNameChange = (e) => {
     pageData.productName = e.target.value;
+};
+
+const handleDescChange = (e) => {
+    pageData.desc = e.target.value;
+};
+
+const handleAmountChange = (e) => {
+    pageData.amount = e.target.value;
 };
 
 function addProduct() {
@@ -184,6 +227,20 @@ function addProduct() {
                             </Input>
                             <br/>
                             <br/>
+                            <Input iconPosition='right' placeholder='تعداد'
+                                   onChange={handleAmountChange}>
+                                <Icon name='sort amount down'/>
+                                <input/>
+                            </Input>
+                            <br/>
+                            <br/>
+                            <Input iconPosition='right' placeholder='توضیحات'
+                                   onChange={handleDescChange}>
+                                <Icon name='sort amount down'/>
+                                <input/>
+                            </Input>
+                            <br/>
+                            <br/>
                             <Button color="green" onClick={submit}>
                                 ثبت کردن
                             </Button>
@@ -194,6 +251,44 @@ function addProduct() {
         )
     }
 }
+
+
+const handleValidationChange = (e) => {
+    pageData.validation = e.target.value;
+};
+
+const validate = (e) => {
+
+};
+
+const showValidation = () => {
+    const item = JSON.parse(localStorage.getItem(USER_INFO));
+    if (item != null){
+        if (item.email_validation === false || item.phone_validation === false){
+            return(
+                <Menu.Item>
+                    <Modal trigger={<Button color="green">تایید حساب</Button>} className="modal">
+                        <Modal.Header className="modal-header">تایید حساب کاربری</Modal.Header>
+                        <Modal.Content>
+                            <Modal.Description>
+                                <Input iconPosition='right' placeholder="کد ارسالی را وارد کنید"
+                                       onChange={handleValidationChange}>
+                                    <Icon name='user'/>
+                                    <input/>
+                                </Input>
+                                <br/>
+                                <br/>
+                                <Button color="green" onClick={validate}>
+                                    ثبت اطلاعات
+                                </Button>
+                            </Modal.Description>
+                        </Modal.Content>
+                    </Modal>
+                </Menu.Item>
+            )
+        }
+    }
+};
 
 const hasMenu = () => {
     const item = localStorage.getItem(USER_INFO);
@@ -270,17 +365,13 @@ const hasMenu = () => {
                         </Label>
                     </Link>
                 </Menu.Item>
-                <Menu.Item>
-                    <Input icon='search' placeholder='جست‌و‌جو'/>
-                </Menu.Item>
-
             </Menu.Menu>
         )
     } else {
         console.log("else");
         getNewData();
         const item = JSON.parse(localStorage.getItem(USER_INFO));
-
+        console.log(item);
         return (
             <Menu.Menu>
                 <Link to='/shop-submit'>
@@ -342,6 +433,7 @@ const hasMenu = () => {
                         </Label>
                     </Link>
                 </Menu.Item>
+                {showValidation()}
                 {addProduct()}
             </Menu.Menu>
         )
@@ -373,7 +465,7 @@ const updateProfile = (event) => {
     if (pageData.phone === "") {
         phoneNumber = item.phone_number
     }
-    fetch('http://192.168.194.100:8000/user/change/profile/', {
+    fetch('http://localhost:8000/user/change/profile/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: item.user_name,
@@ -399,8 +491,9 @@ const updateProfile = (event) => {
 
 const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+        localStorage.setItem("pattern", pageData.pattern);
+        localStorage.setItem("location", pageData.location);
         window.open('/search/' + pageData.pattern, '_self');
-        localStorage.setItem("pattern", pageData.pattern)
     }
 };
 

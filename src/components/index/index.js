@@ -23,24 +23,48 @@ export default class Index extends Component {
         }else {
             localStorage.removeItem("pattern")
         }
-        fetch('http://192.168.194.100:8000/market/menu/search/', {
-            method: 'POST',
-            body: JSON.stringify({
-                market_name: marketName,
-            }),
-            headers: {
-                'Accept': 'application/json',
-                "Content-Type": "application/json; charset=UTF-8"
-            },
-            credentials: 'same-origin'
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data.markets);
-                this.setState({markets: data.markets});
-                console.log(this.state.markets)
+        // alert("aaaaaaa " + localStorage.getItem("location"));
+        if (localStorage.getItem("location") === "true"){
+            // alert("add");
+            fetch('http://localhost:8000/market/menu/search/address/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    address: marketName,
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json; charset=UTF-8"
+                },
+                credentials: 'same-origin'
             })
-            .catch(console.log);
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data.markets);
+                    this.setState({markets: data.markets});
+                    console.log(this.state.markets)
+                })
+                .catch(console.log);
+        } else {
+            // alert("name");
+            fetch('http://localhost:8000/market/menu/search/name/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    market_name: marketName,
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json; charset=UTF-8"
+                },
+                credentials: 'same-origin'
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data.markets);
+                    this.setState({markets: data.markets});
+                    console.log(this.state.markets)
+                })
+                .catch(console.log);
+        }
     }
 
     render() {
@@ -71,7 +95,7 @@ class IndexItem extends Component {
                 <Link to={this.props.link}
                       onClick={this.changeRoutePath}>
                     <div className="index-image">
-                        <img src={"http://192.168.194.100:8000" + this.props.image}/>
+                        <img src={"http://localhost:8000" + this.props.image}/>
                     </div>
                 </Link>
 

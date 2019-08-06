@@ -10,9 +10,10 @@ const pageData = {
 
 export default class AddComment extends Component {
     submit = () => {
+        const isShop = this.props.isShop;
         const marketId = JSON.parse(localStorage.getItem("market_id"));
         const item = JSON.parse(localStorage.getItem("USER_INFO"));
-        fetch('http://192.168.194.100:8000/market/comment/', {
+        fetch('http://localhost:8000/market/comment/', {
             method: 'POST',
             body: JSON.stringify({
                 id: marketId,
