@@ -9,6 +9,7 @@ import Index from './components/index/index'
 import Shop from './components/shop/shop'
 import ShopSubmit from './components/shop/shop-submit'
 import Cart from './components/cart/cart'
+import Product from './components/product/product'
 import AppInstall from './components/app/install'
 
 import * as serviceWorker from './serviceWorker';
@@ -62,6 +63,13 @@ export default class App extends Component {
                              <AppInstall/>
                          </div>
 
+                     )}/>
+
+                     <Route exact path="/product" render={() => (
+                         <div>
+                             <Navigation/>
+                             <Product/>
+                         </div>
                      )}/>
                 
                 </Switch>
