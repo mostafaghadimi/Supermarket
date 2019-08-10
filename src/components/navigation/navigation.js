@@ -15,6 +15,7 @@ const pageData = {
     pattern: "",
     validation: "",
     productName: "",
+    category: "",
     price: 0,
     amount: 0,
     desc: "",
@@ -50,6 +51,13 @@ export default class Navigation extends Component {
                                onChange={handlePatternChange}/>
                     </Menu.Item>
                     <Radio toggle label='برحسب مکان' onChange={toggle} style={{marginTop: "15px"}}/>
+                    <Link to='/download'>
+                        <Menu.Item>
+                            <Button primary>
+                                نصب اپلیکیشن
+                            </Button>
+                        </Menu.Item>
+                    </Link>
                 </Menu>
             </div>
         )
@@ -78,7 +86,7 @@ const handleEmailChange = (e) => {
 
 const signUp = (event) => {
     event.preventDefault();
-    fetch('http://localhost:8000/user/signup/username/', {
+    fetch('http://192.168.194.100:8000/user/signup/username/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: pageData.name,
@@ -107,7 +115,7 @@ const signUp = (event) => {
 
 const login = (event) => {
     event.preventDefault();
-    fetch('http://localhost:8000/user/login/username/', {
+    fetch('http://192.168.194.100:8000/user/login/username/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: pageData.name,
@@ -138,7 +146,7 @@ const login = (event) => {
 const getNewData = () => {
     const item = JSON.parse(localStorage.getItem(USER_INFO));
 
-    fetch('http://localhost:8000/user/show/profile/', {
+    fetch('http://192.168.194.100:8000/user/show/profile/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: item.user_name,
@@ -164,13 +172,14 @@ const submit = (event) => {
     const marketId = JSON.parse(localStorage.getItem("market_id"));
 
     const item = JSON.parse(localStorage.getItem(USER_INFO));
-    fetch('http://localhost:8000/model/add/', {
+    fetch('http://192.168.194.100:8000/model/add/', {
         method: 'POST',
         body: JSON.stringify({
             market: marketId,
             product_name: pageData.productName,
-            count: 45,
+            count: pageData.amount,
             price: pageData.price,
+            category: pageData.category,
             description: pageData.desc,
             api: item.api,
             owner: item.id,
@@ -182,7 +191,7 @@ const submit = (event) => {
         credentials: 'same-origin'
     }).then(response => {
         if (response.status === 201) {
-            window.open('/shop/', '_self')
+            alert("محصول با موفقیت اضافه شد.")
         } else {
         }
         return response.json()
@@ -203,6 +212,10 @@ const handleDescChange = (e) => {
 
 const handleAmountChange = (e) => {
     pageData.amount = e.target.value;
+};
+
+const handleCategoryChange = (e) => {
+    pageData.category = e.target.value;
 };
 
 function addProduct() {
@@ -241,6 +254,13 @@ function addProduct() {
                             </Input>
                             <br/>
                             <br/>
+                            <Input iconPosition='right' placeholder='دسته بندی'
+                                   onChange={handleCategoryChange}>
+                                <Icon name='sort amount down'/>
+                                <input/>
+                            </Input>
+                            <br/>
+                            <br/>
                             <Button color="green" onClick={submit}>
                                 ثبت کردن
                             </Button>
@@ -256,16 +276,43 @@ function addProduct() {
 const handleValidationChange = (e) => {
     pageData.validation = e.target.value;
 };
+let isValidate = false;
 
 const validate = (e) => {
+    e.preventDefault();
+    const item = JSON.parse(localStorage.getItem(USER_INFO));
 
+    fetch('http://192.168.194.100:8000/user/validate/check/phone/', {
+        method: 'POST',
+        body: JSON.stringify({
+            user_name: item.user_name,
+            api: item.api,
+            phone_random: pageData.validation,
+            phone_validation: item.phone_validation,
+        }),
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json; charset=UTF-8"
+        },
+        credentials: 'same-origin'
+    }).then(response => {
+        if (response.status === 201) {
+            isValidate = true;
+        }
+        return response.json()
+    }).then((data) => {
+            if (data.phone_validation === 'true') {
+                window.open('/', '_self');
+            }
+        }
+    ).catch(console.log);
 };
 
 const showValidation = () => {
     const item = JSON.parse(localStorage.getItem(USER_INFO));
-    if (item != null){
-        if (item.email_validation === false || item.phone_validation === false){
-            return(
+    if (item != null) {
+        if (item.phone_validation === false) {
+            return (
                 <Menu.Item>
                     <Modal trigger={<Button color="green">تایید حساب</Button>} className="modal">
                         <Modal.Header className="modal-header">تایید حساب کاربری</Modal.Header>
@@ -465,7 +512,7 @@ const updateProfile = (event) => {
     if (pageData.phone === "") {
         phoneNumber = item.phone_number
     }
-    fetch('http://localhost:8000/user/change/profile/', {
+    fetch('http://192.168.194.100:8000/user/change/profile/', {
         method: 'POST',
         body: JSON.stringify({
             user_name: item.user_name,

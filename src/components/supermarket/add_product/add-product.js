@@ -40,7 +40,7 @@ export default class ProductAddition extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/market/product_add/', {
+        fetch('http://192.168.194.100:8000/market/product_add/', {
             method: 'POST',
             body: JSON.stringify({
                 name: pageData.name,

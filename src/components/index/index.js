@@ -26,7 +26,7 @@ export default class Index extends Component {
         // alert("aaaaaaa " + localStorage.getItem("location"));
         if (localStorage.getItem("location") === "true"){
             // alert("add");
-            fetch('http://localhost:8000/market/menu/search/address/', {
+            fetch('http://192.168.194.100:8000/market/menu/search/address/', {
                 method: 'POST',
                 body: JSON.stringify({
                     address: marketName,
@@ -46,7 +46,7 @@ export default class Index extends Component {
                 .catch(console.log);
         } else {
             // alert("name");
-            fetch('http://localhost:8000/market/menu/search/name/', {
+            fetch('http://192.168.194.100:8000/market/menu/search/name/', {
                 method: 'POST',
                 body: JSON.stringify({
                     market_name: marketName,
@@ -95,7 +95,7 @@ class IndexItem extends Component {
                 <Link to={this.props.link}
                       onClick={this.changeRoutePath}>
                     <div className="index-image">
-                        <img src={"http://localhost:8000" + this.props.image}/>
+                        <img src={"http://192.168.194.100:8000" + this.props.image}/>
                     </div>
                 </Link>
 

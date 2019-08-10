@@ -18,7 +18,7 @@ export default class RoleAddition extends Component {
                 </div>
                 <div className="addition-info">
                     <div className="addition-input">
-                        <input type="text" placeholder="نام و نام خانوادگی پرسنل" onChange={this.handleNameChange}/>
+                        <input type="text" placeholder="شماره پرسنلی" onChange={this.handleNameChange}/>
                     </div>
                     <div className="addition-input">
                         <input type="text" placeholder="نقش در فروشگاه" onChange={this.handleRoleChange}/>
@@ -36,11 +36,16 @@ export default class RoleAddition extends Component {
 
     onSubmitClicked(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/market/role_add/', {
+        const item = JSON.parse(localStorage.getItem("USER_INFO"));
+        const marketId = JSON.parse(localStorage.getItem("market_id"));
+
+        fetch('http://192.168.194.100:8000/market/rule/', {
             method: 'POST',
             body: JSON.stringify({
-                name: pageData.name,
-                role: pageData.role,
+                api: item.api,
+                owner: item.id,
+                id: marketId,
+                rule: pageData.role,
             }),
             headers: {
                 'Accept': 'application/json',

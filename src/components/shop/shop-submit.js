@@ -48,7 +48,7 @@ export default class ShopSubmit extends Component {
         console.log("api = " + api);
         console.log("item = " + item);
         console.log("owner = " + owner);
-        fetch('http://localhost:8000/market/add/', {
+        fetch('http://192.168.194.100:8000/market/add/', {
             method: 'POST',
             body: JSON.stringify({
                 market_name: pageData.name,

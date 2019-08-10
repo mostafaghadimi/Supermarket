@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import {Icon, Rating} from 'semantic-ui-react'
+import {Button, Icon, Rating} from 'semantic-ui-react'
 
 import Comments from '../comment/comment'
 import AddComment from '../comment/addcomment'
 import '../../assets/css/shopinfo.css'
+import {Link} from "react-router-dom";
 
 export default class ShopPage extends Component {
     static defaultProps = {};
@@ -21,7 +22,7 @@ export default class ShopPage extends Component {
         const item = JSON.parse(localStorage.getItem("USER_INFO"));
         const marketId = JSON.parse(localStorage.getItem("market_id"));
 
-        fetch('http://localhost:8000/market/rate/', {
+        fetch('http://192.168.194.100:8000/market/rate/', {
             method: 'POST',
             body: JSON.stringify({
                 id: marketId,
@@ -49,7 +50,7 @@ export default class ShopPage extends Component {
     componentDidMount() {
         const marketId = JSON.parse(localStorage.getItem("market_id"));
 
-        fetch('http://localhost:8000/market/detail/', {
+        fetch('http://192.168.194.100:8000/market/detail/', {
             method: 'POST',
             body: JSON.stringify({
                 id: marketId,
@@ -67,7 +68,7 @@ export default class ShopPage extends Component {
             })
             .catch(console.log);
 
-        fetch('http://localhost:8000/model/menu/search/', {
+        fetch('http://192.168.194.100:8000/model/menu/search/name/', {
             method: 'POST',
             body: JSON.stringify({
                 market: marketId,
@@ -105,14 +106,14 @@ export default class ShopPage extends Component {
                             <ShopInfo info={this.state.market.comments_count + " نظر"} icon="comment" color="yellow"/>
                         </div>
                         <div className="shop-image">
-                            <img src={"http://localhost:8000" + this.state.market.image}/>
+                            <img src={"http://192.168.194.100:8000" + this.state.market.image}/>
                         </div>
                     </div>
                     <div className="shop-products">
                         {
                             this.state.models.map(({id, product_name, price, image}) => {
                                 return (
-                                    <ShopProduct image={"http://localhost:8000" + image} title={product_name}
+                                    <ShopProduct id={id} image={"http://192.168.194.100:8000" + image} title={product_name}
                                                  price={price}/>
                                 )
                             })
@@ -151,7 +152,57 @@ class ShopInfo extends Component {
     }
 }
 
+
 class ShopProduct extends Component {
+    addToCart = () => {
+        const cart = "cart";
+        let parse = JSON.parse(localStorage.getItem(cart));
+        if (parse === null) {
+            let str = JSON.stringify({
+                items: [{
+                    name: this.props.title,
+                    price: this.props.price,
+                    amount: 1
+                },]
+            });
+            localStorage.setItem(cart, str)
+        } else {
+            const items = [];
+            let hasItem = false;
+            parse.items.map(({name, price, amount}) => {
+                if (name === this.props.title) {
+                    items.push({
+                        name: name,
+                        price: price,
+                        amount: amount + 1
+                    });
+                    hasItem = true;
+                } else {
+                    items.push({
+                        name: name,
+                        price: price,
+                        amount: amount
+                    })
+                }
+            });
+            if (!hasItem) {
+                items.push({
+                    name: this.props.title,
+                    price: this.props.price,
+                    amount: 1
+                })
+            }
+            let str = JSON.stringify({
+                items: items
+            });
+            localStorage.setItem(cart, str)
+        }
+    };
+    productClick = () => {
+        localStorage.setItem("product", this.props.id);
+        window.open('/product', '_self')
+    };
+
     render() {
         return (
             <div className="shop-item">
@@ -159,7 +210,7 @@ class ShopProduct extends Component {
                     <img src={this.props.image}/>
                 </div>
 
-                <div className="shop-title">
+                <div className="shop-title" onClick={this.productClick}>
                     <div>
               <span className="shop-icon">
                 <Icon name="shopping bag" color="blue"/>
@@ -173,15 +224,15 @@ class ShopProduct extends Component {
             <span className="shop-icon">
               <Icon name="money bill alternate outline" color="green"/>
             </span>
-              {this.props.price}
-          </div>
-          <div className="product-to-cart">
-            <Icon name="add square" color="orange"/>
-              <span className="add-to-cart">
+                    {this.props.price}
+                </div>
+                <Button className="product-to-cart" onClick={this.addToCart}>
+                    <Icon name="add square" color="orange"/>
+                    <span className="add-to-cart">
                  افزودن به سبد خرید
               </span>
-          </div>
-        </div>
+                </Button>
+            </div>
         )
     }
 }
